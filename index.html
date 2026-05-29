@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechNest BD — Smart Gadget & Tech Store</title>
     <meta name="description" content="বাংলাদেশের সেরা অনলাইন টেক স্টোর - স্মার্টফোন, ল্যাপটপ, হেডফোন এবং গেমিং গিয়ার।">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -251,7 +252,10 @@
 
         /* ========== HERO SECTION ========== */
         #home {
-            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-gray) 100%);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="grad1" x1="0%25" y1="0%25" x2="100%25" y2="100%25"><stop offset="0%25" style="stop-color:%2306b6d4;stop-opacity:0.15" /><stop offset="100%25" style="stop-color:%238b5cf6;stop-opacity:0.15" /></linearGradient></defs><rect width="1200" height="600" fill="%23f8fafc"/><rect width="1200" height="600" fill="url(%23grad1)"/><circle cx="100" cy="50" r="80" fill="%2306b6d4" opacity="0.1"/><circle cx="1100" cy="550" r="100" fill="%238b5cf6" opacity="0.1"/><circle cx="600" cy="300" r="150" fill="%233b82f6" opacity="0.08"/></svg>');
+            background-size: cover;
+            background-position: center;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -1036,7 +1040,7 @@
         /* ========== FLOATING ELEMENTS ========== */
         .floating-cart {
             position: fixed;
-            bottom: 24px;
+            bottom: 100px;
             right: 24px;
             width: 56px;
             height: 56px;
@@ -1073,10 +1077,65 @@
             justify-content: center;
         }
 
+        /* ========== WHATSAPP BUTTON ========== */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+            z-index: 95;
+            animation: whatsappBounce 2s ease-in-out infinite;
+            text-decoration: none;
+        }
+
+        @keyframes whatsappBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.15) translateY(-10px);
+            animation: none;
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: #25D366;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .whatsapp-btn:hover .whatsapp-tooltip {
+            opacity: 1;
+        }
+
         /* ========== TOAST ========== */
         .toast {
             position: fixed;
-            bottom: 100px;
+            bottom: 140px;
             right: 24px;
             background: white;
             border: 1px solid var(--border);
@@ -1086,7 +1145,7 @@
             font-size: 12px;
             font-weight: 600;
             animation: slideUp 0.3s ease forwards;
-            z-index: 95;
+            z-index: 85;
             max-width: 250px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
         }
@@ -1100,6 +1159,161 @@
                 transform: translateY(0);
                 opacity: 1;
             }
+        }
+
+        /* ========== MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .modal h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .order-section {
+            margin-bottom: 24px;
+        }
+
+        .order-section h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--text-dark);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .payment-option {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary);
+            background: rgba(6, 182, 212, 0.05);
+        }
+
+        .payment-option.active {
+            border-color: var(--primary);
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .payment-option-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .payment-option-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .delivery-info {
+            background: var(--bg-gray);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 12px;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .order-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.3);
         }
 
         /* ========== HIDDEN CLASS ========== */
@@ -1159,7 +1373,7 @@
                 <h2>Smart Gadgets, Smart Prices</h2>
                 <p class="hero-desc">বাংলাদেশের সবচেয়ে বিশ্বস্ত টেক স্টোর থেকে কিনুন লেটেস্ট স্মার্টফোন, ল্যাপটপ, হেডফোন এবং গেমিং গিয়ার — অফিশিয়াল ওয়ারেন্টি ও ক্যাশ অন ডেলিভারি সহ।</p>
                 <div class="hero-buttons">
-                    <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now →</button>
+                    <button class="btn btn-primary" onclick="openOrderModal()">Shop Now →</button>
                     <button class="btn btn-secondary" onclick="document.getElementById('deals').scrollIntoView({behavior:'smooth'})">View Deals</button>
                 </div>
                 <div class="hero-stats">
@@ -1359,6 +1573,101 @@
     <div class="floating-cart" onclick="scrollToTop()">
         🛒
         <div class="floating-cart-badge" id="floatingCartBadge">0</div>
+    </div>
+
+    <!-- WHATSAPP BUTTON -->
+    <a href="https://wa.me/8801878877746?text=আমি%20TechNest%20BD%20থেকে%20কিছু%20কিনতে%20চাই।%20সাহায্য%20করুন।" target="_blank" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+        <div class="whatsapp-tooltip">Chat with us on WhatsApp</div>
+    </a>
+
+    <!-- ORDER MODAL -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeOrderModal()">✕</button>
+            <h2>🛍️ আপনার অর্ডার দিন</h2>
+
+            <div class="order-section">
+                <h3>ব্যক্তিগত তথ্য</h3>
+                <div class="form-group">
+                    <label>আপনার নাম *</label>
+                    <input type="text" id="customerName" placeholder="আপনার সম্পূর্ণ নাম লিখুন" required>
+                </div>
+                <div class="form-group">
+                    <label>ফোন নম্বর *</label>
+                    <input type="tel" id="customerPhone" placeholder="01xxxxxxxxx" required>
+                </div>
+                <div class="form-group">
+                    <label>ঠিকানা *</label>
+                    <input type="text" id="customerAddress" placeholder="আপনার সম্পূর্ণ ঠিকানা লিখুন" required>
+                </div>
+            </div>
+
+            <div class="order-section">
+                <h3>পণ্য নির্বাচন</h3>
+                <div class="form-group">
+                    <label>পণ্য *</label>
+                    <select id="productSelect" required>
+                        <option value="">-- পণ্য নির্বাচন করুন --</option>
+                        <option value="iPhone 15 Pro Max - ৳189,000">iPhone 15 Pro Max - ৳189,000</option>
+                        <option value="MacBook Air M3 - ৳175,000">MacBook Air M3 - ৳175,000</option>
+                        <option value="Sony WH-1000XM5 - ৳32,500">Sony WH-1000XM5 - ৳32,500</option>
+                        <option value="Apple Watch Ultra 2 - ৳89,000">Apple Watch Ultra 2 - ৳89,000</option>
+                        <option value="Samsung Galaxy S24 Ultra - ৳145,000">Samsung Galaxy S24 Ultra - ৳145,000</option>
+                        <option value="ASUS ROG Strix G16 - ৳165,000">ASUS ROG Strix G16 - ৳165,000</option>
+                        <option value="AirPods Pro 2 - ৳28,500">AirPods Pro 2 - ৳28,500</option>
+                        <option value="Samsung Galaxy Watch 6 - ৳35,000">Samsung Galaxy Watch 6 - ৳35,000</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>পরিমাণ *</label>
+                    <input type="number" id="productQty" value="1" min="1" max="10" required>
+                </div>
+            </div>
+
+            <div class="order-section">
+                <h3>ডেলিভারি পদ্ধতি</h3>
+                <div class="form-group">
+                    <label>আপনার এলাকা *</label>
+                    <select id="deliveryArea" onchange="updateDeliveryPrice()" required>
+                        <option value="">-- এলাকা নির্বাচন করুন --</option>
+                        <option value="dhaka">ঢাকার মধ্যে (ফ্রি ডেলিভারি)</option>
+                        <option value="outside">ঢাকার বাইরে (ডেলিভারি চার্জ: ৳130)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="order-section">
+                <h3>পেমেন্ট পদ্ধতি</h3>
+                <div class="payment-options">
+                    <div class="payment-option active" onclick="selectPayment('cod')">
+                        <div class="payment-option-icon">💵</div>
+                        <div class="payment-option-name">Cash on Delivery</div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('bkash')">
+                        <div class="payment-option-icon">📱</div>
+                        <div class="payment-option-name">bKash</div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('nagad')">
+                        <div class="payment-option-icon">💳</div>
+                        <div class="payment-option-name">Nagad</div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('card')">
+                        <div class="payment-option-icon">💰</div>
+                        <div class="payment-option-name">Card</div>
+                    </div>
+                </div>
+                <input type="hidden" id="selectedPayment" value="cod">
+            </div>
+
+            <div class="delivery-info">
+                <strong>📦 ডেলিভারি সময়:</strong> ঢাকা ২৪ ঘন্টায়, অন্যান্য এলাকা ৩-৫ কর্মদিবসে। <br><br>
+                <strong>🎁 সুবিধা:</strong> অফিশিয়াল ব্র্যান্ড ওয়ারেন্টি সহ পণ্য পাবেন। <br><br>
+                <strong>❌ ফেরত নীতি:</strong> ৭ দিনের মধ্যে কোনো কারণে ফেরত দিতে পারবেন।
+            </div>
+
+            <button class="order-btn" onclick="submitOrder()">অর্ডার কনফার্ম করুন</button>
+        </div>
     </div>
 
     <!-- SCRIPT -->
@@ -1598,6 +1907,51 @@
             }, 1000);
         }
 
+        // ORDER MODAL FUNCTIONS
+        function openOrderModal() {
+            document.getElementById('orderModal').classList.add('active');
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.remove('active');
+        }
+
+        function selectPayment(method) {
+            document.querySelectorAll('.payment-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            event.target.closest('.payment-option').classList.add('active');
+            document.getElementById('selectedPayment').value = method;
+        }
+
+        function updateDeliveryPrice() {
+            const area = document.getElementById('deliveryArea').value;
+            // Price will be calculated during order submission
+        }
+
+        function submitOrder() {
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('customerAddress').value;
+            const product = document.getElementById('productSelect').value;
+            const qty = document.getElementById('productQty').value;
+            const area = document.getElementById('deliveryArea').value;
+            const payment = document.getElementById('selectedPayment').value;
+
+            if (!name || !phone || !address || !product || !area) {
+                showToast('❌ সব তথ্য পূরণ করুন!');
+                return;
+            }
+
+            const message = `আমার অর্ডার তথ্য:\n\nনাম: ${name}\nফোন: ${phone}\nঠিকানা: ${address}\nপণ্য: ${product}\nপরিমাণ: ${qty}\nএলাকা: ${area}\nপেমেন্ট: ${payment}\n\nঅনুগ্রহ করে অর্ডার কনফার্ম করুন।`;
+            
+            const whatsappUrl = `https://wa.me/8801878877746?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+
+            closeOrderModal();
+            showToast('✅ WhatsApp-এ আপনার অর্ডার পাঠানো হয়েছে!');
+        }
+
         // Search
         document.getElementById('searchInput').addEventListener('input', function() {
             const query = this.value.toLowerCase();
@@ -1670,6 +2024,13 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Close modal when clicking outside
+        document.getElementById('orderModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeOrderModal();
+            }
+        });
     </script>
 </body>
 </html>
